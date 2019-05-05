@@ -1,23 +1,96 @@
+<!DOCTYPE html>
 <html>
 
 <head>
-    <meta charset="utf8">
-    <script src="p5.js"></script>
-    <script src="class.js"></script>
-    <script src="script.js"></script>
-    <style>
-        div{
-            display:inline-block;
-        }
-    
-    </style>
+	<title></title>
+
+	<meta charset="utf8">
+	<style>
+		#legend {
+			position: absolute;
+			top: 0;
+			left: 620px;
+			width: 740px;
+		}
+
+		.legend-color {
+			width: 27px;
+			height: 50px;
+		}
+
+		td {
+			border: 0.7px solid black;
+			font-size: 14px;
+			padding-left: 2px;
+		}
+	</style>
 </head>
 
-
 <body>
-    <div style="background-color:green; width:15px; height:15px"></div>Խոտ
-    <div style="background-color:orange; width:15px; height:15px"></div>Խոտակեր
-    <div style="background-color:#acacac; width:15px; height:15px"></div>Դատարկ տարածք<br><br>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.14/p5.js"></script>
+	<script type="text/javascript" src="script.js"></script>
+	<script type="text/javascript" src="class.js"></script>
+
+	<table id="legend">
+		<tr>
+			<td class="legend-color">Գույն</td>
+			<td>Անվանում</td>
+			<td>Շարժվում է</td>
+			<td>Ուտում է</td>
+			<td>Բազմանում է</td>
+			<td>Սատկում է</td>
+		</tr>
+
+		<tr>
+			<td class="legend-color" style="background-color:gray"></td>
+			<td>Դատարկ վանդակներ</td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td class="legend-color" style="background-color:green"></td>
+			<td>Խոտ</td>
+			<td></td>
+			<td></td>
+			<td>Մոտակա 8 վանդակներում, 6 տակտը մեկ</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td class="legend-color" style="background-color:orange"></td>
+			<td>Խոտակեր</td>
+			<td>Մոտակա 8 վանդակներում, էներգիան քչանում է 1֊ով</td>
+			<td>Խոտերին, մոտակա 8 վանդակներում, շարժվելիս էներգիան ավելանում է 1֊ով</td>
+			<td>Բազմանում է մոտակա տարածքներում 40% հավանականությամբ</td>
+			<td>Սատկում է, երբ էներգիան փոքր է 0֊ից</td>
+		</tr>
+		<tr>
+			<td class="legend-color" style="background-color:red"></td>
+			<td>Գիշատիչ</td>
+			<td>Մոտակա 8 վանդակներում, էներգիան քչանում է 2֊ով</td>
+			<td>Խոտակերներին, մոտակա 8 վանդակներում, շարժվելիս էներգիան ավելանում է 2֊ով</td>
+			<td>Բազմանում է մոտակա տարածքներում 60% հավանականությամբ</td>
+			<td>Սատկում է, երբ էներգիան փոքր է 0֊ից</td>
+		</tr>
+		<tr>
+			<td class="legend-color" style="background-color:blue"></td>
+			<td>Հրեշ</td>
+			<td>2 վանդակ` 8 ուղղություններից մեկով, էներգիան քչանում է 3֊ով</td>
+			<td>Գիշատիչներին և Խոտերին, այն վանդակներում, ուր շարժվում է, շարժվելիս էներգիան ավելանում է 3֊ով</td>
+			<td>Բազմանում է մոտակա տարածքներում 80% հավանականությամբ </td>
+			<td>Սատկում է, երբ էներգիան փոքր է 2֊ից</td>
+		</tr>
+		<tr>
+			<td class="legend-color" style="background-color:#400365"></td>
+			<td>Գազան</td>
+			<td>Մոտակա 8 վանդակներում,
+				էներգիան քչանում է 4-ով</td>
+			<td>Հրեշներին և Խոտակերներին, անկյունագծերով 3 վանդակ շարժվելով, շարժվելիս էներգիան ավելանում է 4֊ով</td>
+			<td>Բազմանում է մոտակա տարածքներում 66% հավանականությամբ</td>
+			<td>Սատկում է, երբ էներգիան փոքր է 4֊ից</td>
+		</tr>
+	</table>
 </body>
 
 </html>
