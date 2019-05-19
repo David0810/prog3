@@ -16,6 +16,18 @@ module.exports = class LivingCreature {
        ];
  
     }
+    newDirections() {
+        this.directions = [
+            [this.x - 1, this.y - 1],
+            [this.x, this.y - 1],
+            [this.x + 1, this.y - 1],
+            [this.x - 1, this.y],
+            [this.x + 1, this.y],
+            [this.x - 1, this.y + 1],
+            [this.x, this.y + 1],
+            [this.x + 1, this.y + 1]
+        ];
+    }
     chooseCell(ch) {
         var found = [];
         for (var i in this.directions) {

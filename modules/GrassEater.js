@@ -65,7 +65,7 @@ module.exports = class Eatgrass extends LivingCreature{
     }
     mul() {
         let rnd = random(100);
-        if (rnd <= 40) {
+        if (rnd <= 10) {
             var foundCords = this.getDirections(0);
             var cord = random(foundCords);
             if (cord) {

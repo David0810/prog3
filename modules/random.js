@@ -1,4 +1,3 @@
-//! My version of P5.js random function, it not tested as it should be
 function random (items){
     var item;
     if (Array.isArray(items)) {

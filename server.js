@@ -1,18 +1,9 @@
-
-
-
-//! Setting global arrays  --  START
 xotArr = [];
 eatArr = [];
 gishatichArr = [];
 hreshArr = [];
 gazanArr = [];
 matrix = [];
-//! Setting global arrays  -- END
-
-
-
-//! Creating MATRIX -- START
 let random = require('./modules/random');
 function matrixGenerator(matrixSize,xot,eat,gishatich,hresh,gazan) {
     for (let i = 0; i < matrixSize; i++) {
@@ -22,7 +13,7 @@ function matrixGenerator(matrixSize,xot,eat,gishatich,hresh,gazan) {
         }
     }
     for (let i = 0; i < xot; i++) {
-        let customX = Math.floor(random(matrixSize)); // 0 - 39
+        let customX = Math.floor(random(matrixSize));
         let customY = Math.floor(random(matrixSize));
         matrix[customY][customX] = 1;
     }
@@ -47,19 +38,12 @@ function matrixGenerator(matrixSize,xot,eat,gishatich,hresh,gazan) {
         matrix[customY][customX] = 5;
     }
 }
-matrixGenerator(40,20,10,5,5,5);
-//! Creating MATRIX -- END
-
-
-
-//! Requiring modules  --  START
+matrixGenerator(40,10,10,10,15,15);
 var Grass = require("./modules/Grass.js");
 var GrassEater = require("./modules/GrassEater.js");
-//! Requiring modules  --  END
-
-
-
-//! SERVER STUFF  --  START
+var Hresh = require("./modules/Hresh.js");
+var Gazan = require("./modules/Gazan.js");
+var Gishatich = require("./modules/Gishatich.js");
 var express = require('express');
 var app = express();
 var server = require('http').Server(app);
@@ -68,31 +52,38 @@ app.use(express.static("."));
 app.get('/', function (req, res) {
     res.redirect('index.html');
 });
-server.listen(3000);
-//! SERVER STUFF END  --  END
-
-
-
+server.listen(8000);
 function creatingObjects() {
     for (var y = 0; y < matrix.length; y++) {
         for (var x = 0; x < matrix[y].length; x++) {
             if (matrix[y][x] == 2) {
                 var grassEater = new GrassEater(x, y);
                 eatArr.push(grassEater);
-                if (matrix[y][x] == 3) {
-                    var hresh = new Hresh(x, y);
-                    hreshArr.push(hresh);
-            } else if (matrix[y][x] == 1) {
+            }
+            else if (matrix[y][x] == 4) {
+                var hresh = new Hresh(x, y);
+                hreshArr.push(hresh);
+            } 
+            else if (matrix[y][x] == 1) {
                 var grass = new Grass(x, y);
                 xotArr.push(grass);
+                
+            } 
+            else if (matrix[y][x] == 3) {
+                var pred = new Gishatich(x, y);
+                gishatichArr.push(pred);
+                
+            }
+            else if (matrix[y][x] == 5) {
+                var gazan = new Gazan(x, y);
+                gazanArr.push(gazan);
+                
             }
         }
     }
 }
+
 creatingObjects();
-
-
-
 function game() {
     for (var i in xotArr) {
         xotArr[i].mul();
@@ -115,17 +106,10 @@ function game() {
         gazanArr[i].eat(4, hreshArr);
         gazanArr[i].eat(2, eatArr);
     }
-
-
-    //! Object to send
     let sendData = {
         matrix: matrix
     }
-
-    //! Send data over the socket to clients who listens "data"
     io.sockets.emit("data", sendData);
 }
-
-
 
 setInterval(game, 1000)
