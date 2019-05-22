@@ -113,7 +113,7 @@ module.exports = class Hresh extends LivingCreature{
  }
  mul() {
      var rnd = random(100);
-     if (rnd <= 80) {
+     if (rnd <= 30) {
          var foundCords = this.getDirections(0);
          var cord = random(foundCords);
          if (cord) {

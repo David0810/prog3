@@ -38,7 +38,7 @@ function matrixGenerator(matrixSize,xot,eat,gishatich,hresh,gazan) {
         matrix[customY][customX] = 5;
     }
 }
-matrixGenerator(40,10,10,10,15,15);
+matrixGenerator(50,5,5,5,5,5);
 var Grass = require("./modules/Grass.js");
 var GrassEater = require("./modules/GrassEater.js");
 var Hresh = require("./modules/Hresh.js");
@@ -46,13 +46,14 @@ var Gazan = require("./modules/Gazan.js");
 var Gishatich = require("./modules/Gishatich.js");
 var express = require('express');
 var app = express();
+seasonTime = 0
 var server = require('http').Server(app);
 var io = require('socket.io')(server);
 app.use(express.static("."));
 app.get('/', function (req, res) {
     res.redirect('index.html');
 });
-server.listen(8000);
+server.listen(4000);
 function creatingObjects() {
     for (var y = 0; y < matrix.length; y++) {
         for (var x = 0; x < matrix[y].length; x++) {
@@ -83,18 +84,41 @@ function creatingObjects() {
     }
 }
 
-creatingObjects();
+creatingObjects()
+let obj = {
+"season":"winter",
+"matrix":matrix
+}
+
+
 function game() {
+    console.log( obj.season);
+    
+    seasonTime++
+    if(seasonTime <= 6)
+    {
+        obj.season = "winter"
+    }
+    else if(seasonTime <= 10)
+    {
+        obj.season = "summer"
+    }
+    else{
+        seasonTime = 0
+    }
     for (var i in xotArr) {
         xotArr[i].mul();
+       
     }
     for (var i in eatArr) {
         eatArr[i].eat();
         eatArr[i].mul();
+     
     }
     for (var i in gishatichArr) {
         gishatichArr[i].mul();
         gishatichArr[i].eat();
+      
     }
     for (var i in hreshArr) {
         hreshArr[i].eat(3, gishatichArr);
@@ -106,10 +130,7 @@ function game() {
         gazanArr[i].eat(4, hreshArr);
         gazanArr[i].eat(2, eatArr);
     }
-    let sendData = {
-        matrix: matrix
-    }
-    io.sockets.emit("data", sendData);
+    io.sockets.emit("data", obj);
 }
 
 setInterval(game, 1000)

@@ -63,7 +63,7 @@ module.exports = class Gishatich extends LivingCreature{
     }
     mul() {
         let rnd = random(100);
-        if (rnd <= 60) {
+        if (rnd <= 20) {
             var foundCords = this.getDirections(0);
             var cord = random(foundCords);
             if (cord) {
