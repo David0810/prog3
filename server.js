@@ -38,7 +38,7 @@ function matrixGenerator(matrixSize,xot,eat,gishatich,hresh,gazan) {
         matrix[customY][customX] = 5;
     }
 }
-matrixGenerator(50,5,5,5,5,5);
+matrixGenerator(50,5,5,2,5,2);
 var Grass = require("./modules/Grass.js");
 var GrassEater = require("./modules/GrassEater.js");
 var Hresh = require("./modules/Hresh.js");
@@ -49,6 +49,7 @@ var app = express();
 seasonTime = 0
 var server = require('http').Server(app);
 var io = require('socket.io')(server);
+var fs = require('fs');
 app.use(express.static("."));
 app.get('/', function (req, res) {
     res.redirect('index.html');
@@ -134,3 +135,30 @@ function game() {
 }
 
 setInterval(game, 1000)
+
+var qanak ={};
+
+setInterval(function (){
+    qanak.xArr=xotArr.length;
+    qanak.eArr=eatArr.length;
+    qanak.gArr=gishatichArr.length;
+    qanak.hArr=hreshArr.length;
+    qanak.gaArr=gazanArr.length;
+    fs.writeFile("qanak.json",JSON.stringify(qanak),function(err){
+        console.log("fs.writeFile ended");
+    });
+ 
+},10)
+io.on('connection', function (socket) {
+    socket.on("spani", function () {
+        xotArr ={}
+        for (var y = 0; y < matrix.length; y++) {
+            for (var x = 0; x < matrix[y].length; x++) {
+                if (matrix[y][x] == 1) {
+                    matrix[y][x] == 0;
+                }
+            }
+        }
+    });
+ });
+ 

@@ -111,7 +111,7 @@ module.exports = class Gazan extends LivingCreature{
     }
     mul() {
         var rnd = random(100);
-        if (rnd <= 66) {
+        if (rnd <= 40) {
             var foundCords = this.getDirections(0);
             var cord = random(foundCords);
             if (cord) {

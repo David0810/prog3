@@ -51,3 +51,6 @@ function setup() {
             }
         }
     }
+function spanel() {
+    io.emit("spani")
+}
