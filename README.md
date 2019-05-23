@@ -1,4 +1,4 @@
-# Programming 3 example (by ananun)
+# Programming 3 example (by David)
 
 This is code example of Tumos project GameOfLife with server side programming.
 
