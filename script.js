@@ -1,5 +1,5 @@
 var socket = io();
-var side = 5;
+var side = 15;
 function setup() {
     let grassCount = document.getElementById('grassCount');
     let grassEaterCount = document.getElementById('grassEaterCount');
@@ -17,7 +17,7 @@ function setup() {
             for (var j = 0; j < matrix[i].length; j++) {
                 if (matrix[i][j] == 1) {
                     if (season == "winter") {
-                        fill("white");
+                        fill("pink");
                     }
                     else
                     {
@@ -31,12 +31,12 @@ function setup() {
                     }
                     else
                     {
-                        fill("purple")
+                        fill("red")
                     }
                    
                 } 
                 else if (matrix[i][j] == 3) {
-                    fill('red');
+                    fill('white');
                     
                 }
                 else if (matrix[i][j] == 4) {
